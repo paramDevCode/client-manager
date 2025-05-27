@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LogoComponent } from '../../shared/logo/logo.component';
+import { LogoComponent } from '../../shared/components/logo/logo.component';
 
 @Component({
   selector: 'app-forgot-password',

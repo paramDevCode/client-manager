@@ -1,0 +1,8 @@
+<div *ngIf="toast.isVisible()"
+     class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 px-4 py-3 rounded shadow-md transition-all"
+     [ngClass]="{
+       'bg-green-500 text-white': toast.toastType() === 'success',
+       'bg-red-500 text-white': toast.toastType() === 'error'
+     }">
+  {{ toast.toastMessage() }}
+</div>
