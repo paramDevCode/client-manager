@@ -17,8 +17,9 @@ register(data: RegisterRequest): Observable<AuthResponse> {
 }
 
 login(data: LoginRequest): Observable<AuthResponse> {
-  return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data);
+  return this.http.post<AuthResponse>(`${this.apiUrl}/login`, data, { withCredentials: true });
 }
+
 
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });

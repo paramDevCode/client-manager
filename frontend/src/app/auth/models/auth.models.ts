@@ -13,5 +13,7 @@ export interface LoginRequest {
 export interface AuthResponse {
   token: string;
   userId: string;
-  // add any other fields returned from backend
+  message?: string;
+  name?: string;  // optionally return user name
 }
+

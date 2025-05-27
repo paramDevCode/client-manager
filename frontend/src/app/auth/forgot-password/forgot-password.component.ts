@@ -4,6 +4,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
+import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service'; // Adjust path if needed
+import { LoginRequest } from '../models/auth.models';
+
 
 @Component({
   selector: 'app-forgot-password',
@@ -15,7 +19,10 @@ import { LogoComponent } from '../../shared/components/logo/logo.component';
 export class ForgotPasswordComponent {
  forgotForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router,
+    private authService: AuthService,
+    private toast: ToastService
+  ) {
     this.forgotForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     });
@@ -26,9 +33,15 @@ export class ForgotPasswordComponent {
       this.forgotForm.markAllAsTouched();
       return;
     }
+    this.authService.forgotPassword(this.forgotForm.value.email).subscribe({
+  next: (res) => this.toast.show('Check your email for reset instructions', 'success'),
+  error: (err) => {
+    const message = err?.error?.message || 'Unexpected error occurred. Please try again.';
+    this.toast.show(message, 'error');
+  }
+});
 
-    console.log('Forgot Password Email:', this.forgotForm.value.email);
-    // Send to forgot password API
+ 
   }
 
    goToLogin() {
