@@ -6,7 +6,6 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators,AbstractControl,ValidationErrors  } from '@angular/forms';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AuthService } from '../../services/auth.service';
-import { ToastComponent } from '../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +15,6 @@ import { ToastComponent } from '../../shared/components/toast/toast.component';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  @ViewChild(ToastComponent) toastRef!: ToastComponent;
 
   registerForm = this.fb.group({
     name: ['', Validators.required],

@@ -24,4 +24,9 @@ login(data: LoginRequest): Observable<AuthResponse> {
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, { email });
   }
+
+ resetPassword(token: string, password: string) {
+  return this.http.post(`/api/auth/reset-password/${token}`, { password });
+}
+
 }
