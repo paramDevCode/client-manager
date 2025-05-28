@@ -89,3 +89,34 @@ exports.forgotPassword = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const token = req.params.token;
+    const { password } = req.body;  // or newPassword if you want to rename
+console.log('Reset token:', token);
+console.log('Password:', password);
+
+    const user = await User.findOne({
+      resetToken: token,
+      tokenExpiry: { $gt: Date.now() },
+    });
+
+    if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    user.password = hashedPassword;
+    user.resetToken = undefined;
+    user.tokenExpiry = undefined;
+
+    await user.save();
+
+    res.json({ message: 'Password reset successful' });
+  } catch (err) {
+    console.error('Reset Password Error:', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+

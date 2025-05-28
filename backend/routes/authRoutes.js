@@ -12,6 +12,8 @@ router.post('/login', authController.login);
 // // Forgot password route (placeholder)
 router.post('/forgot-password', authController.forgotPassword);
 
+router.post('/reset-password/:token', authController.resetPassword);
+
 // // Optional: Logout
 // router.post('/logout', authController.logout);
 
