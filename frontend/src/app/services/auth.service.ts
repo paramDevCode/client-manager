@@ -28,5 +28,12 @@ login(data: LoginRequest): Observable<AuthResponse> {
  resetPassword(token: string, password: string) {
   return this.http.post(`/api/auth/reset-password/${token}`, { password });
 }
+   isLoggedIn(): boolean {
+     return !!localStorage.getItem('token');
+  }
+
+   logout(): void {
+    localStorage.removeItem('token');
+   }
 
 }
