@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
-import { RouterModule } from '@angular/router';
-
+import { HttpClient } from '@angular/common/http';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { DashboardService } from '../dashboard.service';
+import { DashboardStats } from '../models/dashoard-model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+ 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
@@ -9,7 +13,13 @@ import { RouterModule } from '@angular/router';
   templateUrl: './dashboard-layout.component.html',
   styleUrl: './dashboard-layout.component.scss'
 })
-export class DashboardLayoutComponent {
+export class DashboardLayoutComponent implements OnInit {
+   constructor(private dashboardService:DashboardService, private router:Router){
+    
+  }
+  ngOnInit(): void {
+    
+  }
   isSidebarOpen = false;
 
   toggleSidebar() {
@@ -37,4 +47,7 @@ logout() {
   window.location.href = '/auth/login'; // or use router.navigate
 }
 
+
+ 
 }
+ 
