@@ -22,6 +22,8 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/projects', require('./routes/project'));
 
 // Start Server
 const PORT = process.env.PORT || 5000;
