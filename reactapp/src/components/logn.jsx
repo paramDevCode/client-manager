@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import{Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
-
-const Login = ({ setToken }) => {
+ const Login = ({ setToken }) => {
   const navigate = useNavigate(); // ✅ Correct usage of hook at top level
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const API_URL = process.env.REACT_APP_API_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -19,7 +19,7 @@ const Login = ({ setToken }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', {
+      const response = await axios.post(`${API_URL}/auth/login`, {
         email,
         password,
       });
@@ -57,6 +57,12 @@ const Login = ({ setToken }) => {
       >
         Login
       </button>
+       <p className="text-left">
+  <Link to="/Register" className="text-blue-600 hover:underline">
+    Register
+  </Link>
+</p>
+
       <p className='text-right'><a >Forgot password</a></p>
     </form>
     {error && (
